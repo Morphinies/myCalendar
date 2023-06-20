@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  color: #7b655e;
+  color: #68554f;
   box-sizing: border-box;
   font-family: "Bitter", serif;
 }
@@ -16,40 +16,110 @@ main {
   height: 100%;
 }
 
+body {
+  padding: 2rem;
+  background: linear-gradient(130deg, #eee3cb, #f8efd8);
+}
+
 li {
   list-style: none;
 }
 
 .container {
-  padding: 2rem;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 /* header */
 
 .nav {
-  display: flex;
-  justify-content: space-between;
+  gap: 2rem;
+  display: grid;
 }
 
 #date {
-  font-size: 1.75rem;
   font-weight: 600;
+  font-size: 1.75rem;
+  align-self: center;
+  text-align: center;
+  justify-self: center;
+}
+
+.btns {
+  display: flex;
+  column-gap: 0.5rem;
+  grid-area: 2/1/3/4;
+  justify-self: center;
 }
 
 .btn {
+  min-width: 3rem;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
+  min-height: 2rem;
+  text-align: center;
+  width: min-content;
+  align-self: center;
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  border: 2px solid #7b655e;
+  transition: all 0.25s;
+  border: 2px solid #68554f;
   background-color: rgba(0, 0, 0, 0);
 }
 
-.btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+#btn-month {
+  justify-self: end;
 }
 
-.container {
-  background: linear-gradient(130deg, #eee3cb, #f8efd8);
+.btn:hover {
+  box-shadow: 0 0 3px 3px rgba(104, 85, 79, 0.4);
+  background-color: rgba(104, 85, 79, 0.2);
+}
+
+.list {
+  gap: 0.5rem;
+  display: grid;
+  margin: 2rem auto;
+  grid-template-columns: repeat(6, auto);
+}
+
+.list li {
+  width: 100%;
+}
+
+.curDay {
+  background-color: #00ffff;
+}
+
+.curDay:hover {
+  background-color: #00ffff;
+  box-shadow: 0 0 3px 3px rgba(0, 255, 255, 0.4);
+}
+
+@media (max-width: 580px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  body {
+    padding: 1rem;
+  }
+  #headSeparator {
+    display: none;
+  }
+  #date {
+    width: min-content;
+  }
+  .btn {
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
 }
