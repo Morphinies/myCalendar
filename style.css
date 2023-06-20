@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  color: #967e76;
+  color: #7b655e;
   box-sizing: border-box;
   font-family: "Bitter", serif;
 }
@@ -42,7 +42,7 @@ li {
   font-weight: 600;
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  border: 2px solid #967e76;
+  border: 2px solid #7b655e;
   background-color: rgba(0, 0, 0, 0);
 }
 
