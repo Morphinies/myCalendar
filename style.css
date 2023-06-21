@@ -33,23 +33,14 @@ li {
 /* header */
 
 .nav {
-  gap: 2rem;
+  margin: 0 auto;
   display: grid;
-}
-
-#date {
-  font-weight: 600;
-  font-size: 1.75rem;
-  align-self: center;
-  text-align: center;
-  justify-self: center;
-}
-
-.btns {
-  display: flex;
   column-gap: 0.5rem;
-  grid-area: 2/1/3/4;
-  justify-self: center;
+  grid-template-columns: 0.5fr 0.5fr;
+}
+
+.monthNav {
+  margin-top: 3rem;
 }
 
 .btn {
@@ -68,7 +59,8 @@ li {
   background-color: rgba(0, 0, 0, 0);
 }
 
-#btn-month {
+#btn-month,
+#btn-prev-month {
   justify-self: end;
 }
 
@@ -80,8 +72,8 @@ li {
 .list {
   gap: 0.5rem;
   display: grid;
-  margin: 2rem auto;
-  grid-template-columns: repeat(6, auto);
+  margin: 1rem auto;
+  grid-template-columns: repeat(7, auto);
 }
 
 .list li {
@@ -106,12 +98,6 @@ li {
 @media (max-width: 390px) {
   body {
     padding: 1rem;
-  }
-  #headSeparator {
-    display: none;
-  }
-  #date {
-    width: min-content;
   }
   .btn {
     padding: 0.5rem 0.5rem;
