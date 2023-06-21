@@ -17,8 +17,10 @@
   <body>
     <main class="container">
       <nav id="date" class="nav dateNav">
-        <button class="btn" id="btn-month"></button>
+        <button class="btn" id="btn-month" onclick="openMonthList()" ></button>
         <button class="btn" id="btn-year"></button>
+        <ul id="months-list"></ul>
+        <ul id="years-list"></ul>
       </nav>
       <nav class="nav monthNav">
         <button
@@ -39,19 +41,6 @@
         </button>
       </nav>
       <ul id="list" class="list">
-        <li class="btn weeksDay">ПН</li>
-        <li class="btn weeksDay">ВТ</li>
-        <li class="btn weeksDay">СР</li>
-        <li class="btn weeksDay">ЧТ</li>
-        <li class="btn weeksDay">ПТ</li>
-        <li class="btn weeksDay">СБ</li>
-        <li class="btn weeksDay">ВС</li>
-        <!-- <li class="btn monthsDay">1</li>
-        <li class="btn monthsDay">2</li>
-        <li class="btn monthsDay curDay">3</li>
-        <li class="btn monthsDay">4</li>
-        <li class="btn monthsDay">5</li>
-        <li class="btn monthsDay">6</li> -->
       </ul>
     </main>
   </body>

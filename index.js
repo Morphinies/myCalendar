@@ -1,14 +1,24 @@
-// constants
+// variables
 let curDate = new Date();
-const date = document.getElementById("date"); //HEAD DATE BTNS
+const dateBtns = document.getElementById("date"); //HEAD DATE BTNS
 const list = document.getElementById("list"); //DAYS LIST
 
 // default setting
-date.firstElementChild.innerText = getMonthStr(curDate.getMonth()); //HEAD MONTH
-date.lastElementChild.innerText = curDate.getUTCFullYear(); // HEAD YEAR
-addDays(curDate.getFullYear(), curDate.getMonth());
+addDaysName()
+addDays(curDate);
+addDateBtns(curDate)
 
 // functions
+
+function addDaysName(){
+  ["ПН","ВТ","СР","ЧТ","ПТ","СБ","ВС"].forEach(daysName =>{
+      const item = document.createElement("li");
+      item.className = "btn weeksDay";
+      item.innerHTML = daysName;
+      list.append(item);}
+    )
+}
+
 function getMonthStr(monthNumb) {
   const months = [
     "январь",
@@ -27,12 +37,32 @@ function getMonthStr(monthNumb) {
   return months[monthNumb];
 }
 
-function addDays(year, month) {
-  //add old month days to list
-  const date = new Date(year, month);
-  if (date.getDay() > 0) {
-    for (let k = 1; k < date.getDay(); k++) {
-      const dateOld = new Date(date - (date.getDay() - k) * 24 * 3600 * 1000);
+function changeMonth(next) {
+  list.innerHTML = ""
+  if (next) {
+    curDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1);
+  }
+  else{
+    curDate = new Date(curDate.getFullYear(), curDate.getMonth() - 1);
+  }
+  console.log(curDate)
+  addDaysName()
+  addDays(curDate);
+  addDateBtns(curDate)
+}
+
+function addDateBtns(date){
+  dateBtns.firstElementChild.innerText = getMonthStr(date.getMonth()); //HEAD MONTH
+  dateBtns.firstElementChild.nextElementSibling.innerText = date.getFullYear(); // HEAD YEAR
+}
+
+function addDays(date) {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const firstWeeksDay = (new Date(year, month)).getDay();
+  if (firstWeeksDay > 0) {
+    for (let k = 1; k < firstWeeksDay; k++) {
+      const dateOld = new Date(date - (firstWeeksDay - k) * 24 * 3600 * 1000);
       const item = document.createElement("li");
       item.innerHTML = dateOld.getDate();
       item.className = "btn monthsDay";
@@ -40,9 +70,8 @@ function addDays(year, month) {
       list.append(item);
     }
   }
-
-  for (let i = 1; i < 40; i++) {
-    if (list.childElementCount === 42) {
+  for (let i = 1; i < 60; i++) {
+    if (list.childElementCount === 49) {
       return;
     }
     const date = new Date(year, month, i);
@@ -67,9 +96,16 @@ function addDays(year, month) {
   }
 }
 
-function changeMonth(val) {
-  if (val) {
-    curDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1);
+function openMonthList(){
+  const monthsList = document.getElementById("months-list")
+  console.log(monthsList.innerHTML)
+  const ul = document.createElement("ul")
+  for (let i = 0;i < 12; i++){
+    const li = document.createElement("li");
+    li.innerText = getMonthStr(i);
+    ul.append(li) 
   }
-  addDays(curDate.getFullYear(), curDate.getMonth());
+
+  monthsList.innerHTML = ""
+  monthsList.append(ul)
 }

@@ -60,7 +60,8 @@ li {
 }
 
 #btn-month,
-#btn-prev-month {
+#btn-prev-month,
+#months-list {
   justify-self: end;
 }
 
@@ -81,12 +82,12 @@ li {
 }
 
 .curDay {
-  background-color: #00ffff;
+  background-color: #ff9900;
 }
 
 .curDay:hover {
-  background-color: #00ffff;
-  box-shadow: 0 0 3px 3px rgba(0, 255, 255, 0.4);
+  background-color: #df8600;
+  box-shadow: 0 0 3px 3px #df8600;
 }
 
 @media (max-width: 580px) {
