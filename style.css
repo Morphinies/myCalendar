@@ -39,6 +39,10 @@ li {
   grid-template-columns: 0.5fr 0.5fr;
 }
 
+.dateNav{
+  gap: 0.5rem;
+}
+
 .monthNav {
   margin-top: 3rem;
 }
@@ -63,6 +67,16 @@ li {
 #btn-prev-month,
 #months-list {
   justify-self: end;
+}
+
+#months-list{
+  display: flex;
+  row-gap: 0.5rem;
+  flex-direction: column;
+}
+
+#months-list .btn{
+  
 }
 
 .btn:hover {

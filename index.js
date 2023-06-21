@@ -98,14 +98,16 @@ function addDays(date) {
 
 function openMonthList(){
   const monthsList = document.getElementById("months-list")
-  console.log(monthsList.innerHTML)
-  const ul = document.createElement("ul")
-  for (let i = 0;i < 12; i++){
-    const li = document.createElement("li");
-    li.innerText = getMonthStr(i);
-    ul.append(li) 
+  if(monthsList.innerHTML){
+    return monthsList.innerHTML = ""
   }
-
-  monthsList.innerHTML = ""
-  monthsList.append(ul)
+  else{
+    for (let i = 0;i < 12; i++){
+      const li = document.createElement("li");
+      li.innerText = getMonthStr(i);
+      li.className = "btn";
+      monthsList.append(li) 
+    }
+  }
+  
 }
