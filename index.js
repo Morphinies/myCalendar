@@ -1,13 +1,20 @@
 // variables
 let curDate = new Date();
-let choosedDate = new Date();
+let choosedDate = new Date(
+  curDate.getFullYear(),
+  curDate.getMonth(),
+  curDate.getDate()
+);
 const dateTitle = document.getElementById("date-title");
 const dateBtns = document.getElementById("date"); //HEAD DATE BTNS
 const list = document.getElementById("list"); //DAYS LIST
-const notesForm = document.getElementById('notes-form')
+const notesForm = document.getElementById("notes-form");
 
-notesForm.addEventListener("submit", (e) => addNote(e))
+notesForm.addEventListener("submit", (e) => createNote(e));
 dateTitle.addEventListener("click", () => updateInfo(choosedDate));
+
+let notesList = JSON.parse(localStorage.getItem("notesList")) ?? {};
+if (notesList[choosedDate]) console.log(notesList);
 
 // default setting
 updateInfo(curDate);
@@ -15,6 +22,7 @@ updateInfo(curDate);
 // functions
 function updateInfo(date) {
   list.innerHTML = "";
+  updateNotes();
   addDaysName();
   addDays(date);
   addDateBtns(date);
@@ -107,6 +115,9 @@ function addDays(date) {
     const item = document.createElement("li");
     item.className = "btn monthsDay";
     if (+date.getMonth() === +month) {
+      if (notesList[date]) {
+        item.style.textDecoration = "underline";
+      }
       item.innerHTML = date.getDate();
       if (
         choosedDate.getDate() === i &&
@@ -125,10 +136,10 @@ function addDays(date) {
 }
 
 function setDate(date) {
-  // list.innerHTML = "";
   choosedDate = new Date(curDate.getFullYear(), curDate.getMonth(), date);
   curDate = choosedDate;
   updateInfo(choosedDate);
+  updateNotesLS();
 }
 
 function setMonth(month) {
@@ -147,13 +158,13 @@ function setYear(year) {
 
 function openMonthList() {
   const dateList = document.getElementById("date-list");
-  dateList.style.display = "flex"
+  dateList.style.display = "flex";
   //pressing again
   if (dateList.innerHTML) {
     dateList.innerHTML = "";
     if (dateList.className === "date-list month") {
       dateList.className = "date-list";
-      dateList.style.display = "none"
+      dateList.style.display = "none";
       return;
     }
   }
@@ -173,13 +184,13 @@ function openMonthList() {
 
 function openYearList() {
   const dateList = document.getElementById("date-list");
-  dateList.style.display = "flex"
+  dateList.style.display = "flex";
   //pressing again
   if (dateList.innerHTML) {
     dateList.innerHTML = "";
     if (dateList.className === "date-list year") {
       dateList.className = "date-list";
-      dateList.style.display = "none"
+      dateList.style.display = "none";
       return;
     }
   }
@@ -198,13 +209,58 @@ function openYearList() {
   }
 }
 
-function addNote(e){
-  e.preventDefault()
+function addNote(note) {
   const list = document.getElementById("notes-list");
-  const input = document.getElementById("notes-input");
+  const button = document.createElement("button");
+  const imgDel = document.createElement("img");
+  const span = document.createElement("span");
   const li = document.createElement("li");
-  li.innerHTML = input.value;
   li.className = "notes-item";
-  list.append(li)
-  input.value = ""
+  span.innerHTML = note;
+  imgDel.alt = "удалить";
+  imgDel.src = "imgs/del.svg";
+  button.addEventListener("click", () => {
+    const noteIndex = notesList[choosedDate].indexOf(note);
+    notesList[choosedDate].splice(noteIndex, 1);
+    if (!notesList[choosedDate].length) {
+      delete notesList[choosedDate];
+      updateInfo(choosedDate);
+    }
+    li.remove();
+    updateNotesLS();
+  });
+  button.append(imgDel);
+  li.append(span);
+  li.append(button);
+  list.append(li);
+}
+
+function createNote(e) {
+  e.preventDefault();
+  const input = document.getElementById("notes-input");
+  if (input.value) {
+    if (!notesList[choosedDate]) {
+      notesList[choosedDate] = [];
+    }
+    notesList[choosedDate] = [...notesList[choosedDate], input.value];
+    addNote(input.value);
+    input.value = "";
+    updateInfo(choosedDate);
+    updateNotesLS();
+  }
+}
+
+function updateNotesLS() {
+  localStorage.setItem("notesList", JSON.stringify(notesList));
+}
+
+function updateNotes() {
+  const list = document.getElementById("notes-list");
+  list.innerHTML = "";
+  if (notesList[choosedDate]) {
+    for (let item of notesList[choosedDate]) {
+      console.log(item);
+      addNote(item);
+    }
+  }
 }
