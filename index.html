@@ -43,7 +43,13 @@
       <section class="notes">
         <h2 id="date-title"></h2>
         <h3 class="notes-title">Заметки</h3>
-        <input class="notes-input" type="text" placeholder="добавить заметку" />
+        <ul id="notes-list">
+          <li class="notes-item"><span>написать любимой</span><button><img src="imgs/del.svg" alt="удалить"></button></li>
+        </ul>
+        <form id="notes-form">
+          <input id="notes-input" type="text" placeholder="добавить заметку" contenteditable="true"/>
+          <input id="notes-btn-add" class="btn" type="submit" value="+">
+        </form>
       </section>
     </main>
   </body>

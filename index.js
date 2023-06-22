@@ -4,7 +4,9 @@ let choosedDate = new Date();
 const dateTitle = document.getElementById("date-title");
 const dateBtns = document.getElementById("date"); //HEAD DATE BTNS
 const list = document.getElementById("list"); //DAYS LIST
+const notesForm = document.getElementById('notes-form')
 
+notesForm.addEventListener("submit", (e) => addNote(e))
 dateTitle.addEventListener("click", () => updateInfo(choosedDate));
 
 // default setting
@@ -145,11 +147,13 @@ function setYear(year) {
 
 function openMonthList() {
   const dateList = document.getElementById("date-list");
+  dateList.style.display = "flex"
   //pressing again
   if (dateList.innerHTML) {
     dateList.innerHTML = "";
     if (dateList.className === "date-list month") {
       dateList.className = "date-list";
+      dateList.style.display = "none"
       return;
     }
   }
@@ -169,11 +173,13 @@ function openMonthList() {
 
 function openYearList() {
   const dateList = document.getElementById("date-list");
+  dateList.style.display = "flex"
   //pressing again
   if (dateList.innerHTML) {
     dateList.innerHTML = "";
     if (dateList.className === "date-list year") {
       dateList.className = "date-list";
+      dateList.style.display = "none"
       return;
     }
   }
@@ -190,4 +196,15 @@ function openYearList() {
     li.addEventListener("click", () => setYear(year));
     dateList.append(li);
   }
+}
+
+function addNote(e){
+  e.preventDefault()
+  const list = document.getElementById("notes-list");
+  const input = document.getElementById("notes-input");
+  const li = document.createElement("li");
+  li.innerHTML = input.value;
+  li.className = "notes-item";
+  list.append(li)
+  input.value = ""
 }
