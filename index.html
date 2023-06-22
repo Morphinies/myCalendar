@@ -17,17 +17,16 @@
   <body>
     <main class="container">
       <nav id="date" class="nav dateNav">
-        <button class="btn" id="btn-month" onclick="openMonthList()" ></button>
-        <button class="btn" id="btn-year"></button>
-        <ul id="months-list"></ul>
-        <ul id="years-list"></ul>
+        <button class="btn" id="btn-month" onclick="openMonthList()"></button>
+        <button class="btn" id="btn-year" onclick="openYearList()"></button>
+        <ul id="date-list"></ul>
       </nav>
       <nav class="nav monthNav">
         <button
           class="btn"
           id="btn-prev-month"
           title="пред. месяц"
-          onclick="changeMonth(0)"
+          onclick="prevNextMonth(0)"
         >
           <
         </button>
@@ -35,13 +34,17 @@
           class="btn"
           id="btn-next-month"
           title="след. месяц"
-          onclick="changeMonth(1)"
+          onclick="prevNextMonth(1)"
         >
           >
         </button>
       </nav>
-      <ul id="list" class="list">
-      </ul>
+      <ul id="list" class="list"></ul>
+      <section class="notes">
+        <h2 id="date-title"></h2>
+        <h3 class="notes-title">Заметки</h3>
+        <input class="notes-input" type="text" placeholder="добавить заметку" />
+      </section>
     </main>
   </body>
 </html>
